@@ -1,10 +1,10 @@
 import csv
 
-file = open('2016_movie_data.csv')
+file = open('2016_movie_data.csv', 'r')
 with file as csvfile:
-    csv_reader = csv.reader(csv_file, delimiter=',')
+    data_reader = csv.reader(csvfile, delimiter=',')
     line_count = 0
-    for row in csv_reader:
+    for row in data_reader:
         if line_count == 0:
             print(f'Column names are {", ".join(row)}')
             line_count += 1
