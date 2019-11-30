@@ -1,16 +1,32 @@
 import csv
 
-file = open('2016_movie_data.csv', 'r')
-with file as csvfile:
-    data_reader = csv.reader(csvfile, delimiter=',')
-    line_count = 0
-    for row in data_reader:
-        if line_count == 0:
-            print(f'Column names are {", ".join(row)}')
-            line_count += 1
-        else:
-            print(f'\t{row[0]}, {row[1]} date, {row[2]} distributor, {row[3]} genre, {row[4]} MPAA, {row[5]} tickets sold.')
-            line_count += 1
-    print(f'Processed {line_count} lines.')
-
-file.close()
+if __name__ == '__main__':
+    with open('2016_movie_data.csv') as csvfile:
+        csv_reader = csv.reader(csvfile, delimiter=',')
+        movies = []
+        genres = []
+        total = 0
+        i = 0
+        mpaas = []
+        distributors = []
+        for row in csv_reader:
+            if i != 0:
+                name = row[0].replace(',', '').strip()
+                if (name.lower()) not in movies:
+                    movies.append(name.lower())
+                    total += int(row[5].replace(',', ''))
+                genre = row[3]
+                if (genre.lower()) not in genres:
+                    genres.append(genre.lower())
+                mpaa = row[4]
+                if (mpaa.lower()) not in mpaas:
+                    mpaas.append(mpaa.lower())
+                distributor = row[2].replace(',', '').strip()
+                if (distributor.lower()) not in distributors:
+                    distributors.append(distributor.lower())
+            i += 1
+        print(f'Number of Movies: {str(len(movies))}')
+        print(f'Number of different genres: {str(len(genres))}')
+        print(f'Number of different MPAA: {str(len(mpaas))}')
+        print(f'Number of different distributors: {str(len(distributors))}')
+        print(f'Total number of tickets sold: {total}')
