@@ -1,20 +1,86 @@
 import csv
+from collections import Counter
+import matplotlib.pyplot as plot
+import numpy as np
 
+def bar_results(months, counts_for_each_month):
+    
+    months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+    y_pos = np.arange(len(months))
+    barchart = plot.bar(months, counts_for_each_month, align='center', alpha=1.0)
+    plot.xticks(y_pos, months, size=5)
+
+    plot.ylabel('Number of movies', size=8)
+    plot.xlabel('Month', size=8)
+    plot.title('Number of movies released in different months of 2016')
+    plot.show()
+
+def line_graph(months, tickets_each_month):
+    months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+    y_pos = np.arange(len(months))
+    plot.plot(months, tickets_each_month, alpha=1.0)
+    plot.xticks(y_pos, months)
+    plot.xlabel('Month')
+    plot.ylabel('Number of tickets sold')
+    plot.title('Tickets sold in different months of 2016')
+    plot.show()
+
+def pie_chart(keys, values):
+    pieLabels = keys
+    populationShare = values
+    figureObject, axesObject = plot.subplots()
+    axesObject.pie(populationShare, labels=pieLabels, autopct='%1.2f', startangle=90)
+    axesObject.axis('equal')
+    plot.show()
 if __name__ == '__main__':
     with open('2016_movie_data.csv') as csvfile:
         csv_reader = csv.reader(csvfile, delimiter=',')
         movies = []
         genres = []
+        months = []
+        tickets_each_month = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         total = 0
         i = 0
+        k = 0
         mpaas = []
         distributors = []
+        distributors_with_tickets = {}
+        new_distributors_with_tickets = {}
+        counts_for_each_month = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        month = ''
         for row in csv_reader:
             if i != 0:
                 name = row[0].replace(',', '').strip()
                 if (name.lower()) not in movies:
                     movies.append(name.lower())
-                    total += int(row[5].replace(',', ''))
+                    x = int(row[5].replace(',', ''))
+                    total += x
+                date = row[1].split('/')
+                months.append(date[0])
+                if date[0] == '1':
+                    tickets_each_month[0] += x
+                elif date[0] == '2':
+                    tickets_each_month[1] += x
+                elif date[0] == '3':
+                    tickets_each_month[2] += x
+                elif date[0] == '4':
+                    tickets_each_month[3] += x
+                elif date[0] == '5':
+                    tickets_each_month[4] += x
+                elif date[0] == '6':
+                    tickets_each_month[5] += x
+                elif date[0] == '7':
+                    tickets_each_month[6] += x
+                elif date[0] == '8':
+                    tickets_each_month[7] += x
+                elif date[0] == '9':
+                    tickets_each_month[8] += x
+                elif date[0] == '10':
+                    tickets_each_month[9] += x
+                elif date[0] == '11':
+                    tickets_each_month[10] += x
+                elif date[0] == '12':
+                    tickets_each_month[11] += x
                 genre = row[3]
                 if (genre.lower()) not in genres:
                     genres.append(genre.lower())
@@ -22,11 +88,85 @@ if __name__ == '__main__':
                 if (mpaa.lower()) not in mpaas:
                     mpaas.append(mpaa.lower())
                 distributor = row[2].replace(',', '').strip()
+                #distributors_with_tickets[distributor] = [x]
+                if distributor not in distributors_with_tickets:
+                    distributors_with_tickets[distributor] = [x]
+                else:
+                    for key in distributors_with_tickets:
+                        if key == distributor:
+                                distributors_with_tickets[distributor].append(x)
+                new_distributors_with_tickets[distributor] = sum(distributors_with_tickets[distributor])
                 if (distributor.lower()) not in distributors:
                     distributors.append(distributor.lower())
             i += 1
+        print('========Dataset details========\n')
         print(f'Number of Movies: {str(len(movies))}')
         print(f'Number of different genres: {str(len(genres))}')
         print(f'Number of different MPAA: {str(len(mpaas))}')
         print(f'Number of different distributors: {str(len(distributors))}')
-        print(f'Total number of tickets sold: {total}')
+        print(f'Total number of tickets sold: {total}\n')
+        print('===============================\n')
+        counts = Counter(months)
+        while k < len(counts):
+            counts_for_each_month[k] = counts[f'{k + 1}']
+            k += 1
+        j = max(counts)
+        if j == '1':
+            month = 'January'
+        elif j == '2':
+            month = 'February'
+        elif j == '3':
+            month = 'March'
+        elif j == '4':
+            month = 'April'
+        elif j == '5':
+            month = 'May'
+        elif j == '6':
+            month = 'June'
+        elif j == '7':
+            month = 'July'
+        elif j == '8':
+            month = 'August'
+        elif j == '9':
+            month = 'September'
+        elif j == '10':
+            month = 'October'
+        elif j == '11':
+            month = 'November'
+        elif j == '12':
+            month = 'December'
+        print(f'Most movies released ({counts.get(j)}) in {month}')
+        bar_results(months, counts_for_each_month)
+        j = max(tickets_each_month)
+        if j == tickets_each_month[0]:
+            month = 'January'
+        elif j == tickets_each_month[1]:
+            month = 'February'
+        elif j == tickets_each_month[2]:
+            month = 'March'
+        elif j == tickets_each_month[3]:
+            month = 'April'
+        elif j == tickets_each_month[4]:
+            month = 'May'
+        elif j == tickets_each_month[5]:
+            month = 'June'
+        elif j == tickets_each_month[6]:
+            month = 'July'
+        elif j == tickets_each_month[7]:
+            month = 'August'
+        elif j == tickets_each_month[8]:
+            month = 'September'
+        elif j == tickets_each_month[9]:
+            month = 'October'
+        elif j == tickets_each_month[10]:
+            month = 'November'
+        elif j == tickets_each_month[11]:
+            month = 'December'
+            
+        print(f'Most amount of tickets sold ({j}) in {month}\n')
+        line_graph(months, tickets_each_month)
+        print('===============================\n')
+        print('========Tickets sold by distributors========\n')
+        keys = new_distributors_with_tickets.keys()
+        values = new_distributors_with_tickets.values()
+        pie_chart(keys, values)
