@@ -1,25 +1,27 @@
 import csv
 from collections import Counter
 import matplotlib.pyplot as plot
+#import matplotlib.pyplot as plot
+#import matplotlib.pyplot as plot
 import numpy as np
 
-def bar_results(months, counts_for_each_month):
-    
-    months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-    y_pos = np.arange(len(months))
-    barchart = plot.bar(months, counts_for_each_month, align='center', alpha=1.0)
-    plot.xticks(y_pos, months, size=5)
-
+def bar_chart(months_bar, counts_for_each_month):
+    plot.figure(1)
+    months_bar = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+    y_pos = np.arange(len(months_bar))
+    barchart = plot.bar(months_bar, counts_for_each_month, align='center', alpha=1.0)
+    plot.xticks(y_pos, months_bar, size=5)
     plot.ylabel('Number of movies', size=8)
     plot.xlabel('Month', size=8)
     plot.title('Number of movies released in different months of 2016')
     plot.show()
 
-def line_graph(months, tickets_each_month):
-    months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-    y_pos = np.arange(len(months))
-    plot.plot(months, tickets_each_month, alpha=1.0)
-    plot.xticks(y_pos, months)
+def line_graph(months_line, tickets_each_month):
+    plot.figure(2)
+    months_line = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+    y_pos = np.arange(len(months_line))
+    plot.plot(months_line, tickets_each_month, alpha=1.0)
+    plot.xticks(y_pos, months_line, size=5)
     plot.xlabel('Month')
     plot.ylabel('Number of tickets sold')
     plot.title('Tickets sold in different months of 2016')
@@ -32,6 +34,9 @@ def pie_chart(keys, values):
     axesObject.pie(populationShare, labels=pieLabels, autopct='%1.2f', startangle=90)
     axesObject.axis('equal')
     plot.show()
+    # if figureobject < .01:
+        # new_distributors_with_tickets['Others'].append(values)
+
 if __name__ == '__main__':
     with open('2016_movie_data.csv') as csvfile:
         csv_reader = csv.reader(csvfile, delimiter=',')
@@ -46,6 +51,7 @@ if __name__ == '__main__':
         distributors = []
         distributors_with_tickets = {}
         new_distributors_with_tickets = {}
+        updated_distributors_with_tickets = {}
         counts_for_each_month = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         month = ''
         for row in csv_reader:
@@ -88,14 +94,33 @@ if __name__ == '__main__':
                 if (mpaa.lower()) not in mpaas:
                     mpaas.append(mpaa.lower())
                 distributor = row[2].replace(',', '').strip()
-                #distributors_with_tickets[distributor] = [x]
                 if distributor not in distributors_with_tickets:
                     distributors_with_tickets[distributor] = [x]
                 else:
                     for key in distributors_with_tickets:
                         if key == distributor:
                                 distributors_with_tickets[distributor].append(x)
-                new_distributors_with_tickets[distributor] = sum(distributors_with_tickets[distributor])
+                y = sum(distributors_with_tickets[distributor])
+                new_distributors_with_tickets[distributor] = y
+
+                # what i'm trying to do below is make a new dictionary that is able to have the 'Others' as a key with the value consisting of the values that are less than 1% if that makes sense
+                #list1 = list(new_distributors_with_tickets.values())
+                #new_list = [(x / total) * 100 for x in list1]
+                #k = 0
+                # for key in new_distributors_with_tickets:
+                    #new_distributors_with_tickets[distributor] = new_list[k]
+                    #k += 1
+
+                #for key, value in new_distributors_with_tickets:
+                    #new_distributors_with_tickets[distributor] = new_distributors_with_tickets[i]
+                #updated_distributors_with_tickets['Others'] = []
+                #for key in new_distributors_with_tickets:
+                    #if new_distributors_with_tickets[key] / total < .01:
+                        #updated_distributors_with_tickets['Others'].append(new_distributors_with_tickets[key])
+                    #else:
+                        #updated_distributors_with_tickets[key] = new_distributors_with_tickets[key]
+                #updated_distributors_with_tickets['Others'] = sum(updated_distributors_with_tickets['Others'])
+                
                 if (distributor.lower()) not in distributors:
                     distributors.append(distributor.lower())
             i += 1
@@ -106,7 +131,9 @@ if __name__ == '__main__':
         print(f'Number of different distributors: {str(len(distributors))}')
         print(f'Total number of tickets sold: {total}\n')
         print('===============================\n')
-        counts = Counter(months)
+
+        months_bar = months
+        counts = Counter(months_bar)
         while k < len(counts):
             counts_for_each_month[k] = counts[f'{k + 1}']
             k += 1
@@ -135,8 +162,10 @@ if __name__ == '__main__':
             month = 'November'
         elif j == '12':
             month = 'December'
+        bar_chart(months_bar, counts_for_each_month)
+
+        months_line = months
         print(f'Most movies released ({counts.get(j)}) in {month}')
-        bar_results(months, counts_for_each_month)
         j = max(tickets_each_month)
         if j == tickets_each_month[0]:
             month = 'January'
@@ -161,12 +190,28 @@ if __name__ == '__main__':
         elif j == tickets_each_month[10]:
             month = 'November'
         elif j == tickets_each_month[11]:
-            month = 'December'
-            
+            month = 'December'    
         print(f'Most amount of tickets sold ({j}) in {month}\n')
-        line_graph(months, tickets_each_month)
+        line_graph(months_line, tickets_each_month)
+
         print('===============================\n')
         print('========Tickets sold by distributors========\n')
+        count = 0
+        sum = 0
+        for k, v in new_distributors_with_tickets.items():
+            sum += v
+        temp = []
+        for k, v in new_distributors_with_tickets.items():
+            if int(v) / sum < .01:
+                count += int(v)
+                temp += [k]
+        for i in range(len(temp)):
+            del new_distributors_with_tickets[temp[i]]
+        new_distributors_with_tickets["Other"] = count        
         keys = new_distributors_with_tickets.keys()
         values = new_distributors_with_tickets.values()
         pie_chart(keys, values)
+        for k, v in new_distributors_with_tickets.items():
+            temp = str((v/sum)*100)
+            v = temp + "%"
+            print(k, ":", v)        
