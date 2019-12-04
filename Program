@@ -49,6 +49,7 @@ if __name__ == '__main__':
         distributors_with_tickets = {}
         new_distributors_with_tickets = {}
         updated_distributors_with_tickets = {}
+        new_updated_distributors_with_tickets = {}
         counts_for_each_month = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         month = ''
         for row in csv_reader:
