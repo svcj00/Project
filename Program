@@ -33,9 +33,9 @@ def pie_chart(keys, values):
     figureObject, axesObject = plot.subplots()
     axesObject.pie(populationShare, labels=pieLabels, autopct='%1.2f', startangle=90)
     axesObject.axis('equal')
+    plot.title('Percentage of tickets sold by different distributors\n')
     plot.show()
-    # if figureobject < .01:
-        # new_distributors_with_tickets['Others'].append(values)
+
 
 if __name__ == '__main__':
     with open('2016_movie_data.csv') as csvfile:
@@ -197,21 +197,18 @@ if __name__ == '__main__':
         print('===============================\n')
         print('========Tickets sold by distributors========\n')
         count = 0
-        sum = 0
-        for k, v in new_distributors_with_tickets.items():
-            sum += v
         temp = []
         for k, v in new_distributors_with_tickets.items():
-            if int(v) / sum < .01:
+            if int(v) / total < .01:
                 count += int(v)
                 temp += [k]
         for i in range(len(temp)):
             del new_distributors_with_tickets[temp[i]]
-        new_distributors_with_tickets["Other"] = count        
+        new_distributors_with_tickets["Others"] = count        
         keys = new_distributors_with_tickets.keys()
         values = new_distributors_with_tickets.values()
         pie_chart(keys, values)
         for k, v in new_distributors_with_tickets.items():
-            temp = str((v/sum)*100)
+            temp = str(round(((v / total) * 100), 2))
             v = temp + "%"
-            print(k, ":", v)        
+            print(f'{k}: {v}')
