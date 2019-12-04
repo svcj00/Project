@@ -26,11 +26,10 @@ def line_graph(months_line, tickets_each_month):
     plot.show()
 
 def pie_chart(keys, values):
-    pieLabels = keys
-    populationShare = values
-    figureObject, axesObject = plot.subplots()
-    axesObject.pie(populationShare, labels=pieLabels, autopct='%1.2f', startangle=90)
-    axesObject.axis('equal')
+    fig = plot.figure(3)
+    piechart = fig.add_subplot()
+    piechart.pie(values, labels=keys, autopct='%.1f%%', startangle=90)
+    piechart.axis('equal')
     plot.title('Percentage of tickets sold by different distributors\n')
     plot.show()
 
@@ -100,25 +99,6 @@ if __name__ == '__main__':
                                 distributors_with_tickets[distributor].append(x)
                 y = sum(distributors_with_tickets[distributor])
                 new_distributors_with_tickets[distributor] = y
-
-                # what i'm trying to do below is make a new dictionary that is able to have the 'Others' as a key with the value consisting of the values that are less than 1% if that makes sense
-                #list1 = list(new_distributors_with_tickets.values())
-                #new_list = [(x / total) * 100 for x in list1]
-                #k = 0
-                # for key in new_distributors_with_tickets:
-                    #new_distributors_with_tickets[distributor] = new_list[k]
-                    #k += 1
-
-                #for key, value in new_distributors_with_tickets:
-                    #new_distributors_with_tickets[distributor] = new_distributors_with_tickets[i]
-                #updated_distributors_with_tickets['Others'] = []
-                #for key in new_distributors_with_tickets:
-                    #if new_distributors_with_tickets[key] / total < .01:
-                        #updated_distributors_with_tickets['Others'].append(new_distributors_with_tickets[key])
-                    #else:
-                        #updated_distributors_with_tickets[key] = new_distributors_with_tickets[key]
-                #updated_distributors_with_tickets['Others'] = sum(updated_distributors_with_tickets['Others'])
-                
                 if (distributor.lower()) not in distributors:
                     distributors.append(distributor.lower())
             i += 1
