@@ -188,8 +188,8 @@ if __name__ == '__main__':
         values = new_distributors_with_tickets.values()
         pie_chart(keys, values)
         for k, v in new_distributors_with_tickets.items():
-            temp = str(round(((v / total) * 100), 2))
-            updated_distributors_with_tickets[k] = float(temp)
+            x = str(round(((v / total) * 100), 2))
+            updated_distributors_with_tickets[k] = float(x)
         sorted_percentages = sorted(updated_distributors_with_tickets.values())
         new_sorted_percentages = sorted_percentages[::-1]
         i = 0
