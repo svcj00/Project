@@ -24,7 +24,20 @@ def line_graph(months_line, tickets_each_month):
     plot.ylabel('Number of tickets sold')
     plot.title('Tickets sold in different months of 2016')
     plot.show()
-
+def line_graph_mult(months_line, action, horror, comedy, drama):
+    plot.figure(5)
+    months_line = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+    y_pos = np.arange(len(months_line))
+    plot.plot(months_line, action, alpha=1.0, label="Action")
+    plot.plot(months_line, horror, alpha=1.0, label="Horror")
+    plot.plot(months_line, comedy, alpha=1.0, label="Comedy")
+    plot.plot(months_line, drama, alpha=1.0, label="Drama")
+    plot.xticks(y_pos, months_line, size=5)
+    plot.xlabel('Month')
+    plot.ylabel('Number of tickets sold')
+    plot.title('Tickets sold in different months of 2016 per genre')
+    plot.legend()
+    plot.show()
 def pie_chart(keys, values):
     fig = plot.figure(3)
     piechart = fig.add_subplot()
@@ -37,8 +50,18 @@ def pie_chart(keys, values):
 if __name__ == '__main__':
     with open('2016_movie_data.csv') as csvfile:
         csv_reader = csv.reader(csvfile, delimiter=',')
+        drama = []
+        horror = []
+        action = []
+        comedy = []
+        for i in range(12):
+            drama += [0]
+            horror += [0]
+            action += [0]
+            comedy += [0]
         movies = []
         genres = []
+        genrecount = []
         months = []
         tickets_each_month = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         total = 0
@@ -49,7 +72,6 @@ if __name__ == '__main__':
         distributors_with_tickets = {}
         new_distributors_with_tickets = {}
         updated_distributors_with_tickets = {}
-        new_updated_distributors_with_tickets = {}
         counts_for_each_month = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         month = ''
         for row in csv_reader:
@@ -63,28 +85,124 @@ if __name__ == '__main__':
                 months.append(date[0])
                 if date[0] == '1':
                     tickets_each_month[0] += x
+                    if row[3] == "Drama":
+                        drama[0] += x
+                    elif row[3] == "Horror":
+                        horror[0] += x
+                    elif row[3] == "Action":
+                        action[0] += x
+                    elif row[3] == "Comedy":
+                        comedy[0] += x
                 elif date[0] == '2':
                     tickets_each_month[1] += x
+                    if row[3] == "Drama":
+                        drama[1] += x
+                    elif row[3] == "Horror":
+                        horror[1] += x
+                    elif row[3] == "Action":
+                        action[1] += x
+                    elif row[3] == "Comedy":
+                        comedy[1] += x
                 elif date[0] == '3':
                     tickets_each_month[2] += x
+                    if row[3] == "Drama":
+                        drama[2] += x
+                    elif row[3] == "Horror":
+                        horror[2] += x
+                    elif row[3] == "Action":
+                        action[2] += x
+                    elif row[3] == "Comedy":
+                        comedy[2] += x
                 elif date[0] == '4':
                     tickets_each_month[3] += x
+                    if row[3] == "Drama":
+                        drama[3] += x
+                    elif row[3] == "Horror":
+                        horror[3] += x
+                    elif row[3] == "Action":
+                        action[3] += x
+                    elif row[3] == "Comedy":
+                        comedy[3] += x
                 elif date[0] == '5':
                     tickets_each_month[4] += x
+                    if row[3] == "Drama":
+                        drama[4] += x
+                    elif row[3] == "Horror":
+                        horror[4] += x
+                    elif row[3] == "Action":
+                        action[4] += x
+                    elif row[3] == "Comedy":
+                        comedy[4] += x
                 elif date[0] == '6':
                     tickets_each_month[5] += x
+                    if row[3] == "Drama":
+                        drama[5] += x
+                    elif row[3] == "Horror":
+                        horror[5] += x
+                    elif row[3] == "Action":
+                        action[5] += x
+                    elif row[3] == "Comedy":
+                        comedy[5] += x                    
                 elif date[0] == '7':
                     tickets_each_month[6] += x
+                    if row[3] == "Drama":
+                        drama[6] += x
+                    elif row[3] == "Horror":
+                        horror[6] += x
+                    elif row[3] == "Action":
+                        action[6] += x
+                    elif row[3] == "Comedy":
+                        comedy[6] += x
                 elif date[0] == '8':
                     tickets_each_month[7] += x
+                    if row[3] == "Drama":
+                        drama[7] += x
+                    elif row[3] == "Horror":
+                        horror[7] += x
+                    elif row[3] == "Action":
+                        action[7] += x
+                    elif row[3] == "Comedy":
+                        comedy[7] += x
                 elif date[0] == '9':
                     tickets_each_month[8] += x
+                    if row[3] == "Drama":
+                        drama[8] += x
+                    elif row[3] == "Horror":
+                        horror[8] += x
+                    elif row[3] == "Action":
+                        action[8] += x
+                    elif row[3] == "Comedy":
+                        comedy[8] += x
                 elif date[0] == '10':
                     tickets_each_month[9] += x
+                    if row[3] == "Drama":
+                        drama[9] += x
+                    elif row[3] == "Horror":
+                        horror[9] += x
+                    elif row[3] == "Action":
+                        action[9] += x
+                    elif row[3] == "Comedy":
+                        comedy[9] += x
                 elif date[0] == '11':
                     tickets_each_month[10] += x
+                    if row[3] == "Drama":
+                        drama[10] += x
+                    elif row[3] == "Horror":
+                        horror[10] += x
+                    elif row[3] == "Action":
+                        action[10] += x
+                    elif row[3] == "Comedy":
+                        comedy[10] += x
                 elif date[0] == '12':
                     tickets_each_month[11] += x
+                    if row[3] == "Drama":
+                        drama[11] += x
+                    elif row[3] == "Horror":
+                        horror[11] += x
+                    elif row[3] == "Action":
+                        action[11] += x
+                    elif row[3] == "Comedy":
+                        comedy[11] += x
                 genre = row[3]
                 if (genre.lower()) not in genres:
                     genres.append(genre.lower())
@@ -200,3 +318,4 @@ if __name__ == '__main__':
             i += 1
         for k, v in new_updated_distributors_with_tickets.items():
             print(f'{k}: {v}%')
+        line_graph_mult(months_line, action, comedy, drama, horror)
