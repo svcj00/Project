@@ -44,7 +44,7 @@ def line_graph_mult(months_line, action, horror, comedy, drama):
     plot.xticks(y_pos, months_line, size=5)
     plot.xlabel('Month')
     plot.ylabel('Number of tickets sold')
-    plot.title('Tickets sold in different months of 2016 per genre')
+    plot.title('Movies made in different months of 2016 per genre')
     plot.legend()
     plot.show()
     
