@@ -1,9 +1,16 @@
+# File: project.py
+# Author: Melissa Liu, Liel Mendoza, and Samuel Jeyakumar
+# Date: 12/10/2019
+# E-mail: ml99@tamu.edu, lielmendoza123@tamu.edu, and svcj00@tamu.edu
+# Description: Programming I Project - The objective of this project is to give you insight into this aspect of programming using Python. You will write a program that reads a data set in CSV format, analyzes the data set. Next, you will answer the questions provided in the following section. You are allowed to use any libraries of your choice for this project.
+
 import csv
 from collections import Counter
 import matplotlib.pyplot as plot
 import numpy as np
 
 def bar_chart(months_bar, counts_for_each_month):
+    '''Creates the bar chart depicting the number of movies released in different months.'''
     plot.figure(1)
     months_bar = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     y_pos = np.arange(len(months_bar))
@@ -15,6 +22,7 @@ def bar_chart(months_bar, counts_for_each_month):
     plot.show()
 
 def line_graph(months_line, tickets_each_month):
+    '''Creates the line chart depicting the number of tickets sold in different months.'''
     plot.figure(2)
     months_line = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     y_pos = np.arange(len(months_line))
@@ -26,6 +34,7 @@ def line_graph(months_line, tickets_each_month):
     plot.show()
 
 def pie_chart(keys, values):
+    ''' Creates the pie chart depicting the percentage of tickets sold by each distributor.'''
     fig = plot.figure(3)
     piechart = fig.add_subplot()
     piechart.pie(values, labels=keys, autopct='%.1f%%', startangle=90)
@@ -34,6 +43,7 @@ def pie_chart(keys, values):
     plot.show()
 
 def line_graph_mult(months_line, action, horror, comedy, drama):
+    ''' Creates the line chart depicting the number of movies from drama, horror, action and comedy genres released in different months of 2016.'''
     plot.figure(4)
     months_line = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     y_pos = np.arange(len(months_line))
@@ -44,7 +54,7 @@ def line_graph_mult(months_line, action, horror, comedy, drama):
     plot.xticks(y_pos, months_line, size=5)
     plot.xlabel('Month')
     plot.ylabel('Number of tickets sold')
-    plot.title('Movies made in different months of 2016 per genre')
+    plot.title('Tickets sold in different months of 2016 per genre')
     plot.legend()
     plot.show()
     
@@ -88,123 +98,123 @@ if __name__ == '__main__':
                 if date[0] == '1':
                     tickets_each_month[0] += x
                     if row[3] == "Drama":
-                        drama[0] += 1
+                        drama[0] += x
                     elif row[3] == "Horror":
-                        horror[0] += 1
+                        horror[0] += x
                     elif row[3] == "Action":
-                        action[0] += 1
+                        action[0] += x
                     elif row[3] == "Comedy":
-                        comedy[0] += 1
+                        comedy[0] += x
                 elif date[0] == '2':
                     tickets_each_month[1] += x
                     if row[3] == "Drama":
-                        drama[1] += 1
+                        drama[1] += x
                     elif row[3] == "Horror":
-                        horror[1] += 1
+                        horror[1] += x
                     elif row[3] == "Action":
-                        action[1] += 1
+                        action[1] += x
                     elif row[3] == "Comedy":
-                        comedy[1] += 1
+                        comedy[1] += x
                 elif date[0] == '3':
                     tickets_each_month[2] += x
                     if row[3] == "Drama":
-                        drama[2] += 1
+                        drama[2] += x
                     elif row[3] == "Horror":
-                        horror[2] += 1
+                        horror[2] += x
                     elif row[3] == "Action":
-                        action[2] += 1
+                        action[2] += x
                     elif row[3] == "Comedy":
-                        comedy[2] += 1
+                        comedy[2] += x
                 elif date[0] == '4':
                     tickets_each_month[3] += x
                     if row[3] == "Drama":
-                        drama[3] += 1
+                        drama[3] += x
                     elif row[3] == "Horror":
-                        horror[3] += 1
+                        horror[3] += x
                     elif row[3] == "Action":
-                        action[3] += 1
+                        action[3] += x
                     elif row[3] == "Comedy":
-                        comedy[3] += 1
+                        comedy[3] += x
                 elif date[0] == '5':
                     tickets_each_month[4] += x
                     if row[3] == "Drama":
-                        drama[4] += 1
+                        drama[4] += x
                     elif row[3] == "Horror":
-                        horror[4] += 1
+                        horror[4] += x
                     elif row[3] == "Action":
-                        action[4] += 1
+                        action[4] += x
                     elif row[3] == "Comedy":
-                        comedy[4] += 1
+                        comedy[4] += x
                 elif date[0] == '6':
                     tickets_each_month[5] += x
                     if row[3] == "Drama":
-                        drama[5] += 1
+                        drama[5] += x
                     elif row[3] == "Horror":
-                        horror[5] += 1
+                        horror[5] += x
                     elif row[3] == "Action":
-                        action[5] += 1
+                        action[5] += x
                     elif row[3] == "Comedy":
-                        comedy[5] += 1
+                        comedy[5] += x
                 elif date[0] == '7':
                     tickets_each_month[6] += x
                     if row[3] == "Drama":
-                        drama[6] += 1
+                        drama[6] += x
                     elif row[3] == "Horror":
-                        horror[6] += 1
+                        horror[6] += x
                     elif row[3] == "Action":
-                        action[6] += 1
+                        action[6] += x
                     elif row[3] == "Comedy":
-                        comedy[6] += 1
+                        comedy[6] += x
                 elif date[0] == '8':
                     tickets_each_month[7] += x
                     if row[3] == "Drama":
-                        drama[7] += 1
+                        drama[7] += x
                     elif row[3] == "Horror":
-                        horror[7] += 1
+                        horror[7] += x
                     elif row[3] == "Action":
-                        action[7] += 1
+                        action[7] += x
                     elif row[3] == "Comedy":
-                        comedy[7] += 1
+                        comedy[7] += x
                 elif date[0] == '9':
                     tickets_each_month[8] += x
                     if row[3] == "Drama":
-                        drama[8] += 1
+                        drama[8] += x
                     elif row[3] == "Horror":
-                        horror[8] += 1
+                        horror[8] += x
                     elif row[3] == "Action":
-                        action[8] += 1
+                        action[8] += x
                     elif row[3] == "Comedy":
-                        comedy[8] += 1
+                        comedy[8] += x
                 elif date[0] == '10':
                     tickets_each_month[9] += x
                     if row[3] == "Drama":
-                        drama[9] += 1
+                        drama[9] += x
                     elif row[3] == "Horror":
-                        horror[9] += 1
+                        horror[9] += x
                     elif row[3] == "Action":
-                        action[9] += 1
+                        action[9] += x
                     elif row[3] == "Comedy":
-                        comedy[9] += 1
+                        comedy[9] += x
                 elif date[0] == '11':
                     tickets_each_month[10] += x
                     if row[3] == "Drama":
-                        drama[10] += 1
+                        drama[10] += x
                     elif row[3] == "Horror":
-                        horror[10] += 1
+                        horror[10] += x
                     elif row[3] == "Action":
-                        action[10] += 1
+                        action[10] += x
                     elif row[3] == "Comedy":
-                        comedy[10] += 1
+                        comedy[10] += x
                 elif date[0] == '12':
                     tickets_each_month[11] += x
                     if row[3] == "Drama":
-                        drama[11] += 1
+                        drama[11] += x
                     elif row[3] == "Horror":
-                        horror[11] += 1
+                        horror[11] += x
                     elif row[3] == "Action":
-                        action[11] += 1
+                        action[11] += x
                     elif row[3] == "Comedy":
-                        comedy[11] += 1
+                        comedy[11] += x
                 genre = row[3]
                 if (genre.lower()) not in genres:
                     genres.append(genre.lower())
@@ -261,7 +271,7 @@ if __name__ == '__main__':
             month = 'November'
         elif j == '12':
             month = 'December'
-        bar_chart(months_bar, counts_for_each_month)
+        bar_chart.__doc__
 
         months_line = months
         print(f'Most movies released ({counts.get(j)}) in {month}')
@@ -291,7 +301,7 @@ if __name__ == '__main__':
         elif j == tickets_each_month[11]:
             month = 'December'    
         print(f'Most amount of tickets sold ({j}) in {month}\n')
-        line_graph(months_line, tickets_each_month)
+        line_graph.__doc__
 
         print('===============================\n')
         print('========Tickets sold by distributors========\n')
@@ -307,6 +317,7 @@ if __name__ == '__main__':
         keys = new_distributors_with_tickets.keys()
         values = new_distributors_with_tickets.values()
         pie_chart(keys, values)
+
         for k, v in new_distributors_with_tickets.items():
             x = str(round(((v / total) * 100), 2))
             updated_distributors_with_tickets[k] = float(x)
@@ -320,4 +331,5 @@ if __name__ == '__main__':
             i += 1
         for k, v in new_updated_distributors_with_tickets.items():
             print(f'{k}: {v}%')
-        line_graph_mult(months_line, action, comedy, drama, horror)
+
+        line_graph_mult(months_line, action, horror, comedy, drama)
