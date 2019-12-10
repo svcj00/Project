@@ -14,7 +14,7 @@ def bar_chart(months_bar, counts_for_each_month):
     plot.figure(1)
     months_bar = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     y_pos = np.arange(len(months_bar))
-    barchart = plot.bar(months_bar, counts_for_each_month, align='center', alpha=1.0)
+    barchart = plot.bar(months_bar, counts_for_each_month, align='center')
     plot.xticks(y_pos, months_bar, size=5)
     plot.ylabel('Number of movies', size=8)
     plot.xlabel('Month', size=8)
@@ -26,7 +26,7 @@ def line_graph(months_line, tickets_each_month):
     plot.figure(2)
     months_line = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     y_pos = np.arange(len(months_line))
-    plot.plot(months_line, tickets_each_month, alpha=1.0)
+    plot.plot(months_line, tickets_each_month)
     plot.xticks(y_pos, months_line, size=5)
     plot.xlabel('Month')
     plot.ylabel('Number of tickets sold')
@@ -47,10 +47,10 @@ def line_graph_mult(months_line, action, horror, comedy, drama):
     plot.figure(4)
     months_line = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     y_pos = np.arange(len(months_line))
-    plot.plot(months_line, action, alpha=1.0, label="Action")
-    plot.plot(months_line, horror, alpha=1.0, label="Horror")
-    plot.plot(months_line, comedy, alpha=1.0, label="Comedy")
-    plot.plot(months_line, drama, alpha=1.0, label="Drama")
+    plot.plot(months_line, action, label="Action")
+    plot.plot(months_line, horror, label="Horror")
+    plot.plot(months_line, comedy, label="Comedy")
+    plot.plot(months_line, drama, label="Drama")
     plot.xticks(y_pos, months_line, size=5)
     plot.xlabel('Month')
     plot.ylabel('Number of tickets sold')
@@ -271,7 +271,7 @@ if __name__ == '__main__':
             month = 'November'
         elif j == '12':
             month = 'December'
-        bar_chart.__doc__
+        bar_chart(months_bar, counts_for_each_month)
 
         months_line = months
         print(f'Most movies released ({counts.get(j)}) in {month}')
@@ -301,7 +301,7 @@ if __name__ == '__main__':
         elif j == tickets_each_month[11]:
             month = 'December'    
         print(f'Most amount of tickets sold ({j}) in {month}\n')
-        line_graph.__doc__
+        line_graph(months_line, tickets_each_month)
 
         print('===============================\n')
         print('========Tickets sold by distributors========\n')
